@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
   namespace :public do
     root to: "homes#top"
-    get "about" => "homes/about"
+    get "about" => "homes#about"
     resources :orders, only: [:new, :index, :show, :create] do
      collection do
       get "thanks" => "orders/thanks"
