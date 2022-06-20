@@ -1,6 +1,6 @@
 class Public::OrdersController < ApplicationController
   def new
-    @order = Order.all
+    @order = Order.new
   end
 
   def thanks
