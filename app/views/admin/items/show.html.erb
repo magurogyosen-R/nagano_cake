@@ -1,2 +1,9 @@
-<h1>Admin::Items#show</h1>
-<p>Find me in app/views/admin/items/show.html.erb</p>
+<h3>商品一覧</h3>
+  <div class="d-flex flex-row bd-highlight mb-3">
+    <div class><%= image_tag item.get_image, size: "200x100" %></div>
+    <tb>商品名：<%= item.name %></tb>
+    <tb>商品説明：<%= item.introduction %></tb>
+    <tb>※ジャンル名を表示する機能</tb>
+    <tb>※税込価格を表示する機能（税抜き価格）：<%= item.price %></tb>
+  </div>
+<% end %>
