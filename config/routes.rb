@@ -22,8 +22,8 @@ Rails.application.routes.draw do
     get "about" => "homes#about"
     resources :orders, only: [:new, :index, :show, :create] do
      collection do
-      get "thanks" => "orders/thanks"
-      post "confirm" => "orders/confirm"
+      get "thanks" => "orders#thanks"
+      post "confirm" => "orders#confirm"
      end
     end
     resources :customers, only: [:show, :edit, :update] do

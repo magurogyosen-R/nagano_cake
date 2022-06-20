@@ -3,6 +3,10 @@ class Public::OrdersController < ApplicationController
     @order = Order.new
   end
 
+  def confirm
+    @order = Order.new
+  end
+
   def thanks
   end
 
