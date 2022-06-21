@@ -2,7 +2,6 @@ require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-
   # In the development environment your application's code is reloaded any time
   # it changes. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
@@ -63,6 +62,7 @@ Rails.application.configure do
 
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
+  config.web_console.whitelisted_ips = '172.23.0.1'
 
   # Annotate rendered view with file names.
   # config.action_view.annotate_rendered_view_with_filenames = true
@@ -73,5 +73,5 @@ Rails.application.configure do
 
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
-  config.hosts << "f012ea17d38647bbb84051ca3138183a.vfs.cloud9.us-east-1.amazonaws.com"
+  config.hosts << "1122c28b6c224b4880751530985db8c4.vfs.cloud9.us-east-1.amazonaws.com"
 end
