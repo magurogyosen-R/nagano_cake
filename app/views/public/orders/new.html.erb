@@ -9,7 +9,8 @@
 <h4><strong>お届け先</strong></h4>
 <p>
   <%= f.radio_button :receive_news, '0', checked: "checked" %>
-  <%= f.label :receive_news, 'ご自身の住所', value: 0 %>
+  <%= f.label :receive_news, 'ご自身の住所', value: 0 %><br>
+  <%= customer.address %>
 </p>
 
 
@@ -17,6 +18,7 @@
   <%= f.radio_button :receive_news, '1' %>
   <%= f.label :receive_news, '登録済住所から選択', value: 1 %>
 </p>
+  <%= f.collection_select(:addresses_id, Address.all, :id) %>
 
 <p>
   <%= f.radio_button :receive_news, '2' %>

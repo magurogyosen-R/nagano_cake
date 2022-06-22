@@ -1,5 +1,4 @@
 <h3>ショッピングカート</h3>
-<%= form_with model: @order,url: confirm_public_orders_path, method: :post do |f| %>
   <table>
     <thead>
       <tr>
@@ -17,7 +16,6 @@
         <td><%= (cart_item.price * 1.1).floor %></td>
         <td><%= @item.amount %></td>
         <td><%= (cart_item.price * 1.1).floor * cart_item.amount %></td>
-        <% @合計金額 +=  (cart_item.price * 1.1).floor * cart_item.amount %>
         <td><%= link_to "削除する", cart_item_path(cart_item.id), method: :delete %></td>
       </tr>
     <% end %>
@@ -25,12 +23,10 @@
   </table>
   <table>
     <tr>
-      <th>合計金額</th>
-    </tr>
-    <tr>
-      <td></td>
+      <td>合計金額</td>
+      <td><% @total_price +=  (cart_item.price * 1.1).floor * cart_item.amount %></td>
     </tr>
   </table>
   
-  <%= f.submit "確認画面に進む", class: "btn btn-primary" %>
+  <%= link_to "確認画面に進む",new_public_order_path, class: "btn btn-primary" %>
 <% end %>
