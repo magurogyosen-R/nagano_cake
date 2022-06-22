@@ -18,15 +18,21 @@
         </tr>
         <tr>
           <th>ジャンル名</th>
-          <th></th>
+          <th><%= @item.genre_name %></th>
         </tr>
         <tr>
           <th>税込価格（税抜価格）</th>
-          <th><%= @item.price %>円 (<%= @item.price %>)円 </th>
+          <th><%= (@item.price * 1.1).floor %>円 (<%= @item.price %>)円 </th>
         </tr>
         <tr>
           <th>販売ステータス</th>
-          <th></th>
+          <th>
+            <% if @item.sale_status == true %>
+              販売中
+            <% else %>
+              販売停止中
+            <% end %>
+          </th>
         </tr>
       </table>
       <%= link_to "編集する", edit_admin_item_path(@item.id), class:"btn btn-group-sm btn-success" %>

@@ -10,7 +10,7 @@ class Admin::ItemsController < ApplicationController
   end
 
   def index
-    @items = Item.all
+    @items = Item.page(params[:page])
   end
 
   def show
@@ -26,9 +26,18 @@ class Admin::ItemsController < ApplicationController
     item.update(item_params)
     redirect_to admin_item_path(item.id)
   end
+
+  def to_boolean
+     if sale_status == "true"
+       true
+     elsif self == "false"
+       false
+     end
+  end
+
 end
 
 private
   def item_params
-    params.require(:item).permit(:name, :introduction, :image, :price, :id)
+    params.require(:item).permit(:name, :introduction, :image, :price, :id, :genre_name, :sale_status)
   end

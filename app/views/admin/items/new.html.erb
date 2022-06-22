@@ -13,12 +13,25 @@
       <p>商品説明</p>
       <%= f.text_area :introduction %>
 
+      <p>ジャンル</p>
+      <%= f.collection_select :genre_name, Genre.all, :name, :name %>
+
     	<p>税抜価格</p>
     	<%= f.text_field :price %>円</br>
 
-    	<p>販売ステータス</p>
+      <div class="sale_status">
+        <p>販売ステータス</p>
+        <div>
+          <%= f.radio_button :sale_status, true %>
+          <%= f.label :sale_status, '販売中', value: true %>
+        </div>
+        <div>
+          <%= f.radio_button :sale_status, false %>
+          <%= f.label :sale_status, '販売停止中', value: false %>
+        </div>
+      </div>
 
       <%= f.submit '新規登録', class:"btn btn-group-sm btn-success" %>
-    <% end %>
+      <% end %>
   </div>
 </div>
