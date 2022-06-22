@@ -4,15 +4,36 @@ class Public::OrdersController < ApplicationController
   end
 
   def confirm
-    @order = Order.new
+    @order = Order.new(order_params)
+    if @order.invalid?
+      render :new
+    end
+  end
+  
+  def create
+    @order = Order(order.params)
+    @order.customer.id = current_customer.id
+    if params[:back] || !@order.save
+      render :new and return
+    redirect_to root_path
+    end
   end
 
   def thanks
   end
 
   def index
+    @order = Order.all
   end
 
   def show
+    @order = Order.find(params[:id])
   end
+  
+  private
+  
+  def order_params
+    params.require(:event).permit(:event_name, :datetime, :place, detail)
+  end
+  
 end

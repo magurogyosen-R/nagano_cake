@@ -1,1 +1,60 @@
 <h3>注文履歴詳細</h3>
+<p><strong>注文情報</strong></p>
+<table>
+  <tr>
+    <td>注文日</td>
+    <td><%= @order.created_at.strftime('%Y/%m/%d') %></td>
+  </tr>
+  <tr>
+    <td>配送先</td>
+    <td>
+      <%= @order.postcode %><br>
+      <%= @order.address %><br>
+      <%= @order.name %>
+    </td>
+  </tr>
+  <tr>
+    <td>支払方法</td>
+    <td><%= @order.payment_method %></td>
+  </tr>
+  <tr>
+    <td>ステータス</td>
+    <td><%= @order.order_status %></td>
+  </tr>
+</table>
+
+<p><strong>請求情報</strong></p>
+<table>
+  <tr>
+    <td>商品合計</td>
+    <td><% @total_price +=  (cart_item.price * 1.1).floor * cart_item.amount %>円</td>
+  </tr>
+  <tr>
+    <td>配送料</td>
+    <td><%= order.freight %>円</td>
+  </tr>
+  <tr>
+    <td><strong>ご請求額</strong></td>
+    <td><%= @order.sum_of_order_price %>円</td>
+  </tr>
+</table>
+
+<p><strong>注文内容</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>商品</th>
+      <th>単価（税込）</th>
+      <th>個数</th>
+      <th>小計</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><% item.name %></td>
+      <td><%= (cart_item.price * 1.1).floor %></td>
+      <td><%= @item.amount %></td>
+      <td><%= (cart_item.price * 1.1).floor * cart_item.amount %></td>
+    </tr>
+  </tbody>
+</table>
