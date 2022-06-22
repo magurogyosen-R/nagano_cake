@@ -28,7 +28,7 @@ Rails.application.routes.draw do
     end
     resources :customers, only: [:show, :edit, :update] do
      collection do
-       get "out" => "customers/out"
+       get "out" => "customers#out"
        patch "destroyupdate" => "customers/destroyupdate"
      end
     end

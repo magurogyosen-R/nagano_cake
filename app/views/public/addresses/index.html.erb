@@ -1,3 +1,40 @@
 <h4>配送先登録/一覧</h4>
+<%= form_with model: @address, url: public_addresses_path, local:true do |f| %>
+  <div>
+    <%= f.label :postcode,"郵便番号（ハイフンなし）" %>
+    <%= f.text_field :postcode %>
+  </div>
+  <div>
+    <%= f.label :address,"住所" %>
+    <%= f.text_field :address %>
+  </div>
+  <div>
+    <%= f.label :name, "宛名" %>
+    <%= f.text_field :name %>
+    <%= f.submit "新規登録", class: "btn btn-sm btn-success" %>
+  </div>
 
-郵便番号（ハイフンなし）
+
+<% end %>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>郵便番号</th>
+        <th>住所</th>
+        <th>宛名</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+  <% @addresses.each do |address| %>
+    <tbody>
+      <tr>
+        <th><%= address.postcode %></th>
+        <th><%= address.address %></th>
+        <th><%= address.name %></th>
+        <th><%= link_to "編集する", edit_public_address_path(address.id), class: "btn btn-sm btn-success" %></th>
+        <th><%= link_to "削除する", public_address_path(address.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-sm btn-danger" %></th>
+        <% end %>
+      </tr>
+    </tbody>
+  </table>

@@ -1,4 +1,5 @@
 class Public::CustomersController < ApplicationController
+  before_action :authenticate_customer!
   def new
   end
 
@@ -14,9 +15,16 @@ class Public::CustomersController < ApplicationController
   end
 
   def update
+    @customer = current_customer
+    @customer.update(customer_params)
+    redirect_to public_customer_path
   end
 
   def destroyupdate
+    @customer = current_customer
+    @customer.update(is_deleted: true)
+    reset_session
+    redirect_to public_root_path
   end
 
   private
