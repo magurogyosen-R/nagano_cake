@@ -15,7 +15,6 @@
          <% @items.each do |item| %>
            <tr>
              <td>
-               <!----商品idを表示-->
                <%= item.id %>
              </td>
              <td>
@@ -25,13 +24,18 @@
                <%= item.price %>円
              </td>
              <td>
-               <!----ジャンル名を表示-->
+               <%= item.genre_name %>
              </td>
              <td>
-               <!----ステータスを表示-->
+               <% if item.sale_status == true %>
+                 販売中
+               <% else %>
+                 販売停止中
+               <% end %>
              </td>
            </tr>
          <% end %>
       </tbody>
   </table>
+  　<p class="text-center"><%= paginate @items %></p>
 </div>

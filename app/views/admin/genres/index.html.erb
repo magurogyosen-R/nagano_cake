@@ -1,21 +1,23 @@
-<h5>ジャンル一覧・追加</h5>
-<%= render 'form' %>
-
 <div class="container">
-  <table class="table">
-      <thead>
-         <tr>
-          <th>ジャンル</th>
-         </tr>
-      </thead>
-      <tbody>
-         <% @genres.each do |genre| %>
+  <h5>ジャンル一覧・追加</h5>
+  <%= render 'form' %>
+
+  <div class="container">
+    <table class="table">
+        <thead>
            <tr>
-             <td>
-               <%= genre.name %>
-             </td>
+            <th>ジャンル</th>
            </tr>
-         <% end %>
-      </tbody>
-  </table>
+        </thead>
+        <tbody>
+           <% @genres.each do |genre| %>
+             <tr>
+               <td>
+                 <%= genre.name %>
+               </td>
+             </tr>
+           <% end %>
+        </tbody>
+    </table>
+ </div>
 </div>
