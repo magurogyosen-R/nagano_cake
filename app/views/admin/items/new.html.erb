@@ -1,9 +1,9 @@
 <div class="row">
+  <%= render 'error', item: @item %>
+
   <div class="container">
     <h5>商品新規登録</h5>
-
     <%= form_with model: @item, url: '/admin/items', method: :post do |f| %>
-
       <p>商品画像</p>
       <%= f.file_field :image, accept: "image/*" %>
 
@@ -30,7 +30,6 @@
           <%= f.label :sale_status, '販売停止中', value: false %>
         </div>
       </div>
-
       <%= f.submit '新規登録', class:"btn btn-group-sm btn-success" %>
       <% end %>
   </div>

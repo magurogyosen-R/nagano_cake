@@ -5,8 +5,12 @@ class Admin::ItemsController < ApplicationController
 
   def create
     item = Item.new(item_params)
-    item.save
-    redirect_to '/admin/items'
+    if item.save
+      redirect_to item_path(@item.id)
+    else
+      @item = Item.new
+      render 'new'
+    end
   end
 
   def index
