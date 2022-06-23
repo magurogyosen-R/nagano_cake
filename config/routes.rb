@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
   namespace :public do
     root to: "homes#top"
-    get "about" => "homes#about"
+    get "about" => "homes#about", as: 'about'
     resources :orders, only: [:new, :index, :show, :create] do
      collection do
       get "thanks" => "orders#thanks"
@@ -29,7 +29,7 @@ Rails.application.routes.draw do
     resources :customers, only: [:show, :edit, :update] do
      collection do
        get "out" => "customers#out"
-       patch "destroyupdate" => "customers/destroyupdate"
+       patch "destroyupdate" => "customers#destroyupdate"
      end
     end
     resources :addresses, only: [:index, :edit, :destroy, :create, :update]

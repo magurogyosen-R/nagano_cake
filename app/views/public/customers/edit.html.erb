@@ -1,6 +1,6 @@
 <h4>会員情報編集</h4>
 
-    <%= form_with model: @customer, url: public_customer_path, local:true do |f| %>
+    <%= form_with model: @customer, url: public_customer_path do |f| %>
   <div>
     <%= f.label :last_name,"氏名" %>
     <%= f.text_field :last_name %>
@@ -29,7 +29,7 @@
   </div>
   <div>
     <%= f.submit "編集内容を保存", class: "btn btn-sm btn-success" %>
-    <%= link_to "退会する", out_public_customers_path, class: "btn btn-sm btn-danger" %>
+    <%= link_to "退会する", destroyupdate_public_customers_path(@customer), method: :patch, class: "btn btn-sm btn-danger" %>
   </div>
 
 <% end %>
