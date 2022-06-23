@@ -1,6 +1,6 @@
 class Public::CartItemsController < ApplicationController
   def index
-    @order = Order.new
+    @cart_items = current_cart
   end
 
   def destroy
@@ -13,7 +13,8 @@ class Public::CartItemsController < ApplicationController
     cart_item.destroy_all
   end
 
-  privete
+  private
+
   def cart_item_params
     params.require(:cart_item).permit(:item_id, :amount)
   end
