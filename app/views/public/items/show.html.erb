@@ -21,8 +21,8 @@
         </tr>
         <tr>
           <th>
-            <%= form_with model: @cart_item, url: '/public_cart_items_path', method: :post do |f| %>
-            <%= f.hidden_field :item, :value => "amount" %>
+            <%= form_with model: @cart_item, url: '/public/cart_items', method: :post do |f| %>
+            <%= f.hidden_field :item, :value => :amount %>
             <%= f.select :amount, *[1..10], { include_blank: '個数選択'} %>
             <% end %>
           </th>
