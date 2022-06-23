@@ -20,7 +20,12 @@
           <th><%= (@item.price * 1.1).floor %>円 (<%= @item.price %>)円 </th>
         </tr>
         <tr>
-          <th>個数選択の選択ボタン</th>
+          <th>
+            <%= form_with model: @cart_item, url: '/public_cart_items_path', method: :post do |f| %>
+            <%= f.hidden_field :item, :value => "amount" %>
+            <%= f.select :amount, *[1..10], { include_blank: '個数選択'} %>
+            <% end %>
+          </th>
           <th><%= link_to "カートに入れる",public_cart_items_path, class:"btn btn-group-sm btn-success" %></th>
         </tr>
       </table>
