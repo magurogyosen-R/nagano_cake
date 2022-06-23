@@ -1,4 +1,5 @@
 <h3>注文情報確認</h3>
+
 <table>
   <thead>
     <tr>
@@ -31,9 +32,16 @@
   </tr>
   <tr>
     <td>請求金額</td>
-    <td></td>
+    <td><%= @order.total_cost %></td>
   </tr>
 </table>
 
 <p><strong>支払方法</strong><%= @order.payment_method %></p>
-<p><strong>お届け先</strong></p>
+<p><strong>お届け先</strong><%= @order.addresses %></p>
+<%= form_for model: @order,url: confirm_public_orders_path, method: :post do |f| %>
+  <%= f.hidden_field :postcode %>
+  <%= f.hidden_field :address %>
+  <%= f.hidden_field :name %>
+  <%= f.hidden_field :payment_method %>
+  <%= f.hidden_field :total_price %>
+<% end %>

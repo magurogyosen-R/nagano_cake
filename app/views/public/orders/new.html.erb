@@ -1,7 +1,7 @@
 <h3>注文情報入力</h3>
 
-<%= form_with model: @order,url: confirm_public_orders_path, method: :post do |f| %>
-<h4><strong>支払方法</strong></h4>
+<%= form_for model: @order,url: confirm_public_orders_path, method: :post do |f| %>
+<h4><strong>支払方法</strong></h4>address
 
 <p><%= f.radio_button :payment_method, 0,checked: "checked" %>クレジットカード</p>
 <p><%= f.radio_button :payment_method, 1 %>銀行振込</p>
@@ -10,7 +10,9 @@
 <p>
   <%= f.radio_button :receive_news, '0', checked: "checked" %>
   <%= f.label :receive_news, 'ご自身の住所', value: 0 %><br>
+  <%= customer.postcode %>
   <%= customer.address %>
+  <%= customer.name %>
 </p>
 
 
