@@ -12,9 +12,9 @@
   <tbody>
     <% @cart_item.each do |cart_item| %>
       <tr>
-        <td><%= image_tag @item.get_image %><%= @item.name %></td>
+        <td><%= image_tag cart_item.get_image %><%= cart_item.name %></td>
         <td><%= (cart_item.price * 1.1).floor %></td>
-        <td><%= @item.amount %></td>
+        <td><%= cart_item.amount %></td>
         <td><%= (cart_item.price * 1.1).floor * cart_item.amount %></td>
       </tr>
     <% end %>
