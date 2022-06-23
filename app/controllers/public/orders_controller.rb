@@ -33,7 +33,7 @@ class Public::OrdersController < ApplicationController
   private
   
   def order_params
-    params.require(:event).permit(:event_name, :datetime, :place, detail)
+    params.require(:order).permit(:address, :postcode, :payment_method, :name )
   end
   
 end

@@ -50,11 +50,13 @@
     </tr>
   </thead>
   <tbody>
+    <% @order.each do |order| %>
     <tr>
-      <td><% item.name %></td>
+      <td><% order.name %></td>
       <td><%= (cart_item.price * 1.1).floor %></td>
-      <td><%= @item.amount %></td>
+      <td><%= .amount %></td>
       <td><%= (cart_item.price * 1.1).floor * cart_item.amount %></td>
     </tr>
+    <% end %>
   </tbody>
 </table>

@@ -13,7 +13,10 @@
 <p><%= order.payment_method %></p>
 <p><strong>注文ステータス</strong></p>
 <p>
-  
+  <%= form_with @order, url: admin_order_path do |f| %>
+    <%= f.select :order_status, "入金待ち","入金確認","製作中","発送準備中","発送済" %>
+    <%= f.submit "更新", class: "btn btn-primary" %>
+  <% end %>
 </p>
 
 <table>
@@ -28,11 +31,11 @@
   </thead>
   <tbody>
     <tr>
-      <td><%= order_detail.name %></td>
+      <td><%= @order.name %></td>
       <td><%= (cart_item.price * 1.1).floor %></td>
-      <td><%= @item.amount %></td>
+      <td><%= @order.amount %></td>
       <td><%= (cart_item.price * 1.1).floor * cart_item.amount %></td>
-      <td>
+      <td><%= select('order','order_status',[""] )
         
       </td>
     </tr>

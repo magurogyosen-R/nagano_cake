@@ -1,6 +1,6 @@
 <h3>注文情報入力</h3>
 
-<%= form_for model: @order,url: confirm_public_orders_path, method: :post do |f| %>
+<%= form_with model: @order,url: confirm_public_orders_path, method: :post do |f| %>
 <h4><strong>支払方法</strong></h4>
 
 <p><%= f.radio_button :payment_method, 0,checked: "checked" %>クレジットカード</p>
@@ -10,18 +10,18 @@
 <p>
   <%= f.radio_button :receive_news, '0', checked: "checked" %>
   <%= f.label :receive_news, 'ご自身の住所', value: 0 %><br>
-  <%= customer.postcode %>
-  <%= customer.address %>
-  <%= customer.name %>
+  <%= current_customer.postcode %>
+  <%= current_customer.address %>
+  <%= current_customer.last_name %>
+  <%= current_customer.first_name %>
 </p>
 
 
 <p>
   <%= f.radio_button :receive_news, '1' %>
-  <%= f.label :receive_news, '登録済住所から選択', value: 1 %>
-</p>
+  <%= f.label :receive_news, '登録済住所から選択', value: 1 %><br>
   <%= f.collection_select(:addresses_id, Address.all, :id) %>
-
+</p>
 <p>
   <%= f.radio_button :receive_news, '2' %>
   <%= f.label :receive_news, '新しいお届け先', value: 2 %>
