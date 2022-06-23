@@ -24,9 +24,8 @@
   <table>
     <tr>
       <td>合計金額</td>
-      <td><% @total_price +=  (cart_item.price * 1.1).floor * cart_item.amount %></td>
+      <td><% @total_price +=  (cart_item.price * 1.1).floor * cart_item.amount %>円</td>
     </tr>
   </table>
-  
+
   <%= link_to "確認画面に進む",new_public_order_path, class: "btn btn-primary" %>
-<% end %>
