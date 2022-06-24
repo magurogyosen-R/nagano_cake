@@ -12,10 +12,11 @@
   <tbody>
     <% @cart_item.each do |cart_item| %>
       <tr>
-        <td><%= image_tag @item.get_image %><%= @item.name %></td>
+        <td><%= image_tag cart_item.get_image %><%= cart_item.name %></td>
         <td><%= (cart_item.price * 1.1).floor %></td>
-        <td><%= @item.amount %></td>
+        <td><%= cart_item.amount %></td>
         <td><%= (cart_item.price * 1.1).floor * cart_item.amount %></td>
+        ><% @total_price +=  (cart_item.price * 1.1).floor * cart_item.amount %>
       </tr>
     <% end %>
   </tbody>
@@ -28,20 +29,21 @@
   </tr>
   <tr>
     <td>商品合計</td>
-    <td><% @total_price +=  (cart_item.price * 1.1).floor * cart_item.amount %></td>
+    <td><% @total_price %></td>
   </tr>
   <tr>
     <td>請求金額</td>
-    <td><%= @order.total_cost %></td>
+    <td><%= @total_price+order.freight %></td>
   </tr>
 </table>
 
 <p><strong>支払方法</strong><%= @order.payment_method %></p>
-<p><strong>お届け先</strong><%= @order.addresses %></p>
-<%= form_for model: @order,url: confirm_public_orders_path, method: :post do |f| %>
+<p><strong>お届け先</strong><%= @order.postcode %><%= @order.address %><%= @order.name %></p>
+<%= form_for model: @order,url: thanks_public_orders_path, method: :post do |f| %>
   <%= f.hidden_field :postcode %>
   <%= f.hidden_field :address %>
   <%= f.hidden_field :name %>
   <%= f.hidden_field :payment_method %>
   <%= f.hidden_field :total_price %>
+  <%= f.submit "注文を確定する" %>
 <% end %>
