@@ -35,9 +35,7 @@
       <td><%= (cart_item.price * 1.1).floor %></td>
       <td><%= @order.amount %></td>
       <td><%= (cart_item.price * 1.1).floor * cart_item.amount %></td>
-      <td><%= select('order','order_status',[""] )
-        
-      </td>
+      <td><%= select('order_detail','production_statuses_status',["製作不可", "製作待ち", "製作中", "製作完了"] )       </td>
     </tr>
   </tbody>
 </table>
