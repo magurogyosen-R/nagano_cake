@@ -1,5 +1,5 @@
 class Item < ApplicationRecord
-  belongs_to :cart_item
+  has_many :cart_item
 
   has_one_attached :image
   def get_image

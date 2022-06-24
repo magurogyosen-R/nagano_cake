@@ -19,6 +19,7 @@ class Admin::ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
+    @cart_item = CartItem.new
   end
 
   def edit
@@ -39,9 +40,8 @@ class Admin::ItemsController < ApplicationController
      end
   end
 
+  private
+    def item_params
+      params.require(:item).permit(:name, :introduction, :image, :price, :id, :genre_name, :sale_status)
+    end
 end
-
-private
-  def item_params
-    params.require(:item).permit(:name, :introduction, :image, :price, :id, :genre_name, :sale_status)
-  end

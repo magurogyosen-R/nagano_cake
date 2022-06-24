@@ -21,14 +21,11 @@
         </tr>
         <tr>
           <th>
-            <%= form_with model: @cart_item, url: '/public_cart_items_path', method: :post do |f| %>
-            <%= f.hidden_field :item, :value => "amount" %>
+            <%= form_with model: @cart_item, url: '/public/cart_items', method: :post do |f| %>
             <%= f.select :amount, *[1..10], { include_blank: '個数選択'} %>
+            <%= f.hidden_field :item_id, :value => @item.id %>
+            <%= f.submit 'カートに入れる', class:"btn btn-primary" %>
             <% end %>
-          </th>
-          <th><%= link_to "カートに入れる",public_cart_items_path, class:"btn btn-group-sm btn-success" %></th>
-        </tr>
-      </table>
       </div>
   </div>
 </div>
