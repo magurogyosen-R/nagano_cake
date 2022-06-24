@@ -14,8 +14,8 @@
 <p><strong>注文ステータス</strong></p>
 <p>
   <%= form_with @order, url: admin_order_path do |f| %>
-    <%= f.select :order_status, "入金待ち","入金確認","製作中","発送準備中","発送済" %>
-    <%= f.submit "更新", class: "btn btn-primary" %>
+    <%= f.select :order_status, ["入金待ち","入金確認","製作中","発送準備中","発送済"] %>
+    <%= f.submit "更新", class: "btn btn-success" %>
   <% end %>
 </p>
 
@@ -30,12 +30,17 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td><%= @order.name %></td>
-      <td><%= (cart_item.price * 1.1).floor %></td>
-      <td><%= @order.amount %></td>
-      <td><%= (cart_item.price * 1.1).floor * cart_item.amount %></td>
-      <td><%= select('order_detail','production_statuses_status',["製作不可", "製作待ち", "製作中", "製作完了"] ) %></td>
-    </tr>
+    <% @order_details.each do |order_detail| %>
+      <tr>
+        <td><%= order_detail.name %></td>
+        <td><%= (order_detail.price * 1.1).floor %></td>
+        <td><%= order_detail.amount %></td>
+        <td><%= (order_detail.price * 1.1).floor * order_detail.amount %></td>
+        <%= form_for order_detail, url: admin_order_path(order_detail) do |f| %>
+          <td><%= f.select :production_statuses,["製作不可", "製作待ち", "製作中", "製作完了"]  %></td>
+          <td><%= f.submit "更新",class:"btn btn-success" %></td>
+        <% end %>
+      </tr>
+    <% end %>
   </tbody>
 </table>

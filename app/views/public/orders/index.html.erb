@@ -12,17 +12,22 @@
   </thead>
   <tbody>
     <% @orders.each do |order| %>
-    <tr>
-      <td><%= order.created_at.strftime('%Y/%m/%d') %></td>
-      <td>
-        <%= order.postcode %>
-        <%= order.address %>
-        <%= order.name %>
-      </td>
-      <td><%= order.name %></td>
-      <td><%= (cart_item.price * 1.1).floor * cart_item.amount %>円</td>
-      <td><%= order.order_status %></td>
-      <td><%= link_to "表示する", public_order_path(order), class: "btn btn-primary" %></td>
-    </tr>
+      <tr>
+        <td><%= order.created_at.strftime('%Y/%m/%d') %></td>
+        <td>
+          <%= order.postcode %>
+          <%= order.address %>
+          <%= order.name %>
+        </td>
+        <td>
+          <% @cart_items.each do |cart_item| %>
+            <%= cart_item.item.name %>
+          <% end %>
+        </td>
+        <td><%= (cart_item.price * 1.1).floor * cart_item.amount %>円</td>
+        <td><%= order.order_status %></td>
+        <td><%= link_to "表示する", public_order_path(order), class: "btn btn-primary" %></td>
+      </tr>
+    <% end %>
   </tbody>
 </table>

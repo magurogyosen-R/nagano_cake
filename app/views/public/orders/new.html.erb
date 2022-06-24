@@ -16,7 +16,6 @@
   <%= current_customer.first_name %>
 </p>
 
-
 <p>
   <%= f.radio_button :address_number, '1' %>
   <%= f.label :address_number, '登録済住所から選択', value: 1 %><br>
@@ -24,9 +23,7 @@
 </p>
 <p>
   <%= f.radio_button :address_number, '2' %>
-  <%= f.label :address_number, '新しいお届け先', value: 2 %>
-</p>
-
+  <%= f.label :address_number, '新しいお届け先', value: 2 %><br>
   <%= f.label :postcode, "郵便番号(ハイフンなし)" %>
   <%= f.text_field :postcode, autocomplete: "postcode" %><br>
   <%= f.label :address, "住所" %>
@@ -34,5 +31,5 @@
   <%= f.label :name, "宛名" %>
   <%= f.text_field :name, autocomplete: "name" %><br>
   <%= f.submit "確認画面に進む", class: "btn btn-primary" %>
-
+</p>
 <% end %>

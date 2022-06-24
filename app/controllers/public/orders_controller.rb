@@ -29,29 +29,35 @@ class Public::OrdersController < ApplicationController
         render "new"
       end
     end
+    @cart_items = CartItem.where(customer_id: current_customer.id)
   end
 
   def create
     @order = Order.new(order.params)
     @order.customer.id = current_customer.id
-    redirect_to root_path
+    @order.save
   end
 
   def thanks
   end
 
   def index
-    @order = Order.all
+    @orders = current_customer.orders
   end
 
   def show
     @order = Order.find(params[:id])
+    @cart_items = @order.cart_items
   end
 
   private
 
   def order_params
     params.require(:order).permit(:address, :postcode, :payment, :name )
+  end
+
+  def address_params
+    params.permit(:addresses, :name, :postcode, :customer_id)
   end
 
 end
