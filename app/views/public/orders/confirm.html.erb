@@ -37,13 +37,13 @@
   </tr>
 </table>
 
-<p><strong>支払方法</strong><%= @order.payment_method %></p>
+<p><strong>支払方法</strong><%= @order.payment %></p>
 <p><strong>お届け先</strong><%= @order.postcode %><%= @order.address %><%= @order.name %></p>
 <%= form_for model: @order,url: thanks_public_orders_path, method: :post do |f| %>
   <%= f.hidden_field :postcode %>
   <%= f.hidden_field :address %>
   <%= f.hidden_field :name %>
-  <%= f.hidden_field :payment_method %>
+  <%= f.hidden_field :payment %>
   <%= f.hidden_field :total_price %>
   <%= f.submit "注文を確定する" %>
 <% end %>
