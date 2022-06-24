@@ -1,8 +1,8 @@
 class Public::CartItemsController < ApplicationController
   def create
-    @cart_item = CartItem.new(cart_item_params)
-    @cart_item.save
-    redirect_to cart_items_path
+    cart_item = CartItem.new(cart_item_params)
+    cart_item.save
+    redirect_to public_cart_items_path
   end
 
   def index
@@ -19,10 +19,9 @@ class Public::CartItemsController < ApplicationController
     cart_item = CartItem.where(cart_item)
     cart_item.destroy_all
   end
+end
 
   private
     def cart_item_params
-      params.require(:cart_item).permit(:item_id, :amount)
+      params.permit(:item_id, :amount)
     end
-
-end
