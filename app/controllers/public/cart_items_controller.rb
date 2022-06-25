@@ -1,4 +1,5 @@
 class Public::CartItemsController < ApplicationController
+
   def create
     cart_item = CartItem.new(cart_item_params)
     cart_item.save
@@ -21,7 +22,7 @@ class Public::CartItemsController < ApplicationController
   end
 end
 
-  private
-    def cart_item_params
-      params.permit(:item_id, :amount)
-    end
+ private
+  def cart_item_params
+      params.require(:cart_item).permit(:item_id, :amount)
+  end
