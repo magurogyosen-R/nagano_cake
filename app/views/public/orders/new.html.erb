@@ -3,30 +3,27 @@
 <%= form_with model: @order,url: confirm_public_orders_path, method: :post do |f| %>
 <h4><strong>支払方法</strong></h4>
 
-<p><%= f.radio_button :payment_method, 0,checked: "checked" %>クレジットカード</p>
-<p><%= f.radio_button :payment_method, 1 %>銀行振込</p>
+<p><%= f.radio_button :payment, 0,checked: "checked" %>クレジットカード</p>
+<p><%= f.radio_button :payment, 1 %>銀行振込</p>
 
-<h4><strong>お届け先</strong></h4>
+<h4><strong>お届け先</strong></h4>  
 <p>
-  <%= f.radio_button :receive_news, '0', checked: "checked" %>
-  <%= f.label :receive_news, 'ご自身の住所', value: 0 %><br>
+  <%= f.radio_button :address_number, '0', checked: "checked" %>
+  <%= f.label :address_number, 'ご自身の住所', value: 0 %><br>
   <%= current_customer.postcode %>
   <%= current_customer.address %>
   <%= current_customer.last_name %>
   <%= current_customer.first_name %>
 </p>
 
-
 <p>
-  <%= f.radio_button :receive_news, '1' %>
-  <%= f.label :receive_news, '登録済住所から選択', value: 1 %><br>
-  <%= f.collection_select(:addresses_id, Address.all, :id) %>
+  <%= f.radio_button :address_number, '1' %>
+  <%= f.label :address_number, '登録済住所から選択', value: 1 %><br>
+  <%= f.collection_select(:addresses_id, @addresses, :id, :order_address) %>
 </p>
 <p>
-  <%= f.radio_button :receive_news, '2' %>
-  <%= f.label :receive_news, '新しいお届け先', value: 2 %>
-</p>
-
+  <%= f.radio_button :address_number, '2' %>
+  <%= f.label :address_number, '新しいお届け先', value: 2 %><br>
   <%= f.label :postcode, "郵便番号(ハイフンなし)" %>
   <%= f.text_field :postcode, autocomplete: "postcode" %><br>
   <%= f.label :address, "住所" %>
@@ -34,5 +31,5 @@
   <%= f.label :name, "宛名" %>
   <%= f.text_field :name, autocomplete: "name" %><br>
   <%= f.submit "確認画面に進む", class: "btn btn-primary" %>
-
+</p>
 <% end %>
