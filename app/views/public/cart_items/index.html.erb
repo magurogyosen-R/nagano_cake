@@ -1,31 +1,48 @@
 <h3>ショッピングカート</h3>
- <div class="container">
-  <table class="table">
-      <thead>
-         <tr>
-          <th>商品名</th>
-          <th>単価（税込）</th>
-          <th>数量</th>
-          <th>小計</th>
-         </tr>
-      </thead>
-      <tbody>
-         <% @cart_items.each do |cart_item| %>
-           <tr>
-             <td>
-               <%= cart_item.item.id %>
-             </td>
-             <td>
-               <%= cart_item.item.price %>
-             </td>
-             <td>
-               <%= cart_item.item.amount %>円
-             </td>
-             <td>
 
-             </td>
-           </tr>
-         <% end %>
-      </tbody>
+<%= button_to "カートを空にする", destroy_all_public_cart_items_path, method: :delete, data: {confirm: 'カートを空にして本当によろしいですか？'}, class: "btn btn-danger destroy-all" %>
+
+<div class="container">
+  <table class="table">
+   <thead>
+    <tr>
+     <th>商品名</th>
+     <th>単価（税込）</th>
+     <th>数量</th>
+     <th>小計</th>
+     <th> </th>
+    </tr>
+   </thead>
+   <tbody>
+    <% @cart_items.each do |cart_item| %>
+    <tr>
+     <td>
+      <%= cart_item.item.name %>
+     </td>
+     <td>
+      <%= cart_item.item.price %>
+     </td>
+     <td>
+      <%= form_with model: cart_item, url: public_cart_item_path(cart_item.id), method: :patch, local: true do |f| %>
+      <%= f.select :amount, *[1..10], { include_blank: cart_item.amount} %>
+      <%= f.submit "変更", class: 'btn btn-success' %>
+      <% end %>
+     </td>
+     <td>
+      <%= (cart_item.item.price * 1.1).to_i %>
+     </td>
+     <td>
+      <%= link_to "削除する", public_cart_item_path(cart_item.id), method: :delete, class: "btn btn-danger" %>
+     </td>
+    </tr>
+    <% end %>
+   </tbody>
   </table>
-  <%= link_to "確認画面に進む",new_public_order_path, class: "btn btn-primary" %>
+  </div>
+  <div>
+   <%= link_to "買い物を続ける", root_path, class: "btn btn-primary" %>
+  </div></br>
+	 <div>
+   <%= link_to "情報入力に進む",new_public_order_path, class: 'btn btn-success' %>
+  </div>
+</div>
