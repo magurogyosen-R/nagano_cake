@@ -33,7 +33,7 @@ class Public::OrdersController < ApplicationController
   end
 
   def create
-    @order = Order.new(order.params)
+    @order = Order.new(order_params)
     @order.customer.id = current_customer.id
     @order.save
   end
@@ -53,11 +53,11 @@ class Public::OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:address, :postcode, :payment, :name )
+    params.require(:order).permit(:address, :postcode, :payment, :name, :address_number )
   end
 
   def address_params
-    params.permit(:addresses, :name, :postcode, :customer_id)
+    params.permit(:addresses, :name, :postcode, :customer_id, :address_number )
   end
 
 end
