@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-12">
       <h4 class="col-12 offset-2">注文情報入力</h4>
-      <%= form_with model: @order,url: confirm_public_orders_path, method: :post do |f| %>
+      <%= form_with model: @order,url: confirm_orders_path, method: :post do |f| %>
       <h5><strong>支払方法</strong></h5>
 
       <div class="col-12 offset-1"><%= f.radio_button :payment, Order.payments.key(0),checked: "checked" %>クレジットカード</div>
