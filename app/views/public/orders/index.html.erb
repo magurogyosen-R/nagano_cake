@@ -27,7 +27,7 @@
                 <%= order_detail.item.name %>
               <% end %>
             </td>
-            <td><%= order.buy_price %>円</td>
+            <td><%= order.total_cost %>円</td>
             <td><%= order.order_status %></td>
             <td><%= link_to "表示する", public_order_path(order), class: "btn btn-primary" %></td>
           </tr>

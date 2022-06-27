@@ -17,7 +17,7 @@
       </tr>
       <tr>
         <th>支払方法</th>
-        <td><%= @order.payment_method %></td>
+        <td><%= @order.payment %></td>
       </tr>
       <tr>
         <th>ステータス</th>
@@ -36,12 +36,14 @@
         </tr>
       </thead>
       <tbody>
-        <% @order_details.each do |order_detail| %>
+        <% @order_detail.each do |order_detail| %>
+        <% @total_price +=  (order_detail.item.price * 1.1).floor * order_detail.amount %>
         <tr>
-          <td><%= order_detail.name %></td>
-          <td><%= order_detail.order.price.to_s(:delimited) %></td>
+          <td><%= order_detail.item.name %></td>
+          <td><%= order_detail.item.price.to_s(:delimited) %></td>
           <td><%= order_detail.amount %></td>
-          <td><%= order_detail.buy_price.to_s(:delimited) %></td>
+          <td><%= @total_price.to_s(:delimited) %></td>
+          <% @total += (@total_price*order_detail.amount) %>
         </tr>
         <% end %>
       </tbody>
@@ -51,7 +53,7 @@
     <table class "table offset-6">
       <tr>
         <th>商品合計</th>
-        <td><% total_price(@order_details).to_s(:delimited) %></td>
+        <td><%= @total.to_s(:delimited) %></td>
       </tr>
       <tr>
         <th>配送料</th>
