@@ -21,7 +21,7 @@
       <div class="col-12 offset-1">
         <%= f.radio_button :address_number, '1' %>
         <%= f.label :address_number, '登録済住所から選択', value: 1 %><br>
-        <%= f.collection_select(:addresses_id, @addresses, :id, :order_address) %>
+        <%= f.collection_select(:addresses_id, @addresses, :id, :address) %>
       </div>
       <div class="col-12 offset-1">
         <%= f.radio_button :address_number, '2' %>

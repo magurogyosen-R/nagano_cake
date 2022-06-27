@@ -12,9 +12,9 @@ class Public::OrdersController < ApplicationController
       @order.address = current_customer.address
       @order.name = current_customer.last_name+current_customer.first_name
     elsif params[:order][:address_number] == "1"
-      @order.postcode = Address.find(params[:order][:address]).postcode
-      @order.address = Address.find(params[:order][:address]).addresses
-      @order.name = Address.find(params[:order][:address]).name
+      @order.postcode = Address.find(params[:order][:addresses_id]).postcode
+      @order.address = Address.find(params[:order][:addresses_id]).address
+      @order.name = Address.find(params[:order][:addresses_id]).name
     elsif params[:order][:address_number] == "2"
       @order.customer_id = current_customer.id
     else

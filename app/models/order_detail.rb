@@ -1,7 +1,7 @@
 class OrderDetail < ApplicationRecord
-  
+
   belongs_to :order
 	belongs_to :item
-  
-  enum production_statuses: { production_not:0, production_wait:1, in_production:2, production_completion:3 }
+
+  enum production_status: { 製作不可:0, 製作待ち:1, 製作中:2, 製作完了:3 }
 end
