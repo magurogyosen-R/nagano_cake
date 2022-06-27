@@ -10,14 +10,14 @@
         <div class="item-box">
           <table class="table">
             <tr>
-              <th><%= link_to  public_item_path(item.id) do %>
+              <th><%= link_to  item_path(item.id) do %>
               <%= image_tag item.get_image, size: "150x100" %>
               <% end %>
               </th>
             </tr>
             <tr>
               <th>
-               <small class="text-muted"><%= link_to item.name, public_item_path(item.id) %></small>
+               <small class="text-muted"><%= link_to item.name, item_path(item.id) %></small>
               </th>
             </tr>
             <tr>
