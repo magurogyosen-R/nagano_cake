@@ -16,15 +16,19 @@ class Public::CustomersController < ApplicationController
 
   def update
     @customer = current_customer
-    @customer.update(customer_params)
-    redirect_to public_customer_path
+    if @customer.update(customer_params)
+    flash[:notice] = "You have updated user successfully."
+    redirect_to customer_path
+    else
+     render :edit
+    end
   end
 
   def destroyupdate
     @customer = current_customer
     @customer.update(is_deleted: true)
     reset_session
-    redirect_to public_root_path
+    redirect_to root_path
   end
 
   private
