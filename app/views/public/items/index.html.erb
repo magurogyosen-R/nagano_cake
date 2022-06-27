@@ -1,12 +1,11 @@
 <div class="container">
   <div class="form-inline">
-    <div class="col-2">
+    <div class="col-2 ">
      <%= render 'admin/genres/genrebox', genres: @genres %>
     </div>
-
     <div class="col-10">
       <h2>商品一覧</h2>
-      <div class="form-inline mt-4 col-xs-9">
+      <div class="form-inline mt-4">
         <% @items.each do |item| %>
         <div class="item-box">
           <table class="table">
@@ -17,7 +16,9 @@
               </th>
             </tr>
             <tr>
-              <th><%= link_to item.name, public_item_path(item.id) %></th>
+              <th>
+               <small class="text-muted"><%= link_to item.name, public_item_path(item.id) %></small>
+              </th>
             </tr>
             <tr>
               <th><%= (item.price * 1.1).to_i %>円</th>

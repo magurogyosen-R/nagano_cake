@@ -110,8 +110,8 @@ ActiveRecord::Schema.define(version: 2022_06_26_031824) do
     t.integer "order_id"
     t.integer "item_id"
     t.integer "buy_price"
-    t.integer "amount"
-    t.integer "production_status"
+    t.integer "amount", default: 0
+    t.integer "production_status", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -1,27 +1,27 @@
 <div class="container">
   <div class="row">
-    
+
   </div>
 </div>
 
 
 <h3>注文履歴詳細</h3>
 <p><strong>購入者</strong></p>
-<p><%= customer.name %></p>
+<p><%= @order.name %></p>
 <p><strong>注文日</strong></p>
-<p><%= order.created_at.strftime('%Y/%m/%d') %></p>
+<p><%= @order.created_at.strftime('%Y/%m/%d') %></p>
 <p><strong>配送先</strong></p>
 <p>
-  <%= order.postcode %>
-  <%= order.address %><br>
-  <%= order.name %>
+  <%= @order.postcode %>
+  <%= @order.address %><br>
+  <%= @order.name %>
 </p>
 <p><strong>支払方法</strong></p>
-<p><%= order.payment_method %></p>
+<p><%= @order.payment %></p>
 <p><strong>注文ステータス</strong></p>
 <p>
-  <%= form_with @order, url: admin_order_path do |f| %>
-    <%= f.select :order_status, ["入金待ち","入金確認","製作中","発送準備中","発送済"] %>
+  <%= form_with model:@order, url: admin_order_path, method: :patch do |f| %>
+    <%= f.select :order_status, Order.order_statuses.keys %>
     <%= f.submit "更新", class: "btn btn-success" %>
   <% end %>
 </p>
@@ -39,15 +39,31 @@
   <tbody>
     <% @order_details.each do |order_detail| %>
       <tr>
-        <td><%= order_detail.name %></td>
-        <td><%= (order_detail.price * 1.1).floor %></td>
+        <td><%= order_detail.item.name %></td>
+        <td><%= order_detail.item.price.to_i %></td>
         <td><%= order_detail.amount %></td>
-        <td><%= (order_detail.price * 1.1).floor * order_detail.amount %></td>
-        <%= form_for order_detail, url: admin_order_path(order_detail) do |f| %>
-          <td><%= f.select :production_statuses,["製作不可", "製作待ち", "製作中", "製作完了"]  %></td>
-          <td><%= f.submit "更新",class:"btn btn-success" %></td>
+        <td><%= (order_detail.item.price * 1.1).to_i %></td>
+        <%= form_with model:order_detail, url: admin_order_detail_path(order_detail), method: :patch do |f| %>
+          <td><%= f.select :production_status,OrderDetail.production_statuses.keys %></td>
+          <td><%= f.submit "更新",class: "btn btn-success" %></td>
         <% end %>
+        <% @total_price +=  (order_detail.item.price * 1.1).floor * order_detail.amount %>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+ <table class "table">
+      <tr>
+        <th>商品合計</th>
+        <td><%= @total_price.to_s(:delimited) %>円</td>
+      </tr>
+      <tr>
+        <th>送料</th>
+        <td><%= @order.freight.to_s(:delimited) %>円</td>
+      </tr>
+      <tr>
+        <th><strong>ご請求額</strong></th>
+        <td><%= @order.total_cost.to_s(:delimited) %>円</td>
+      </tr>
+    </table>

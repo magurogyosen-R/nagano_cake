@@ -10,14 +10,14 @@
       <tr>
         <th>配送先</th>
         <td>
-          <%= @order.postcode %><br>
+          〒<%= @order.postcode %><br>
           <%= @order.address %><br>
           <%= @order.name %>
         </td>
       </tr>
       <tr>
         <th>支払方法</th>
-        <td><%= @order.payment_method %></td>
+        <td><%= @order.payment %></td>
       </tr>
       <tr>
         <th>ステータス</th>
@@ -36,12 +36,13 @@
         </tr>
       </thead>
       <tbody>
-        <% @cart_items.each do |cart_item| %>
+        <% @order_detail.each do |order_detail| %>
         <tr>
-          <td><% cart_item.name %></td>
-          <td><%= (cart_item.price * 1.1).floor %></td>
-          <td><%= cart_item.amount.all %></td>
-          <td><%= (cart_item.price * 1.1).floor * cart_item.amount %></td>
+          <td><%= order_detail.item.name %></td>
+          <td><%= order_detail.item.price.to_i %></td>
+          <td><%= order_detail.amount %></td>
+          <td><%= (order_detail.item.price * 1.1).to_i %></td>
+          <% @total_price +=(order_detail.item.price * 1.1).floor * order_detail.amount %>
         </tr>
         <% end %>
       </tbody>
@@ -51,15 +52,15 @@
     <table class "table offset-6">
       <tr>
         <th>商品合計</th>
-        <td><% @total_price +=  (cart_item.price * 1.1).floor * cart_item.amount %>円</td>
+        <td><%= @total_price.to_s(:delimited) %></td>
       </tr>
       <tr>
         <th>配送料</th>
-        <td><%= order.freight %>円</td>
+        <td><%= @order.freight.to_s(:delimited) %></td>
       </tr>
       <tr>
         <th><strong>ご請求額</strong></th>
-        <td><%= @order.sum_of_order_price %>円</td>
+        <td><%= @order.total_cost.to_s(:delimited) %></td>
       </tr>
     </table>
   </div>

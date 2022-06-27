@@ -5,37 +5,39 @@ class Public::OrdersController < ApplicationController
   end
 
   def confirm
-    params[:order][:payment] = params[:order][:payment].to_i
     @order = Order.new(order_params)
+    @order.freight = 800
     if params[:order][:address_number] == "0"
       @order.postcode = current_customer.postcode
       @order.address = current_customer.address
       @order.name = current_customer.last_name+current_customer.first_name
     elsif params[:order][:address_number] == "1"
-      @order.postcode = Address.find(params[:order][:address]).postcode
-      @order.address = Address.find(params[:order][:address]).addresses
-      @order.name = Address.find(params[:order][:address]).name
+      @order.postcode = Address.find(params[:order][:addresses_id]).postcode
+      @order.address = Address.find(params[:order][:addresses_id]).address
+      @order.name = Address.find(params[:order][:addresses_id]).name
     elsif params[:order][:address_number] == "2"
-      @address = Address.new()
-      @address.addresses = params[:order][:addresses]
-      @address.postcode = params[:order][:postcode]
-      @address.name = params[:order][:name]
-      @address.customer_id = current_customer.id
-      if @address.save
-        @order.postcode = @address.postcode
-        @order.address = @address.addresses
-        @order.name = @address.name
-      else
-        render "new"
-      end
+      @order.customer_id = current_customer.id
+    else
+      redirect_to root_path
     end
     @cart_items = CartItem.where(customer_id: current_customer.id)
   end
 
   def create
     @order = Order.new(order_params)
-    @order.customer.id = current_customer.id
+    @order.customer = current_customer
     @order.save
+    @cart_items = current_customer.cart_items.all
+    @cart_items.each do |cart_item|
+      @order_detail = OrderDetail.new
+      @order_detail.item_id = cart_item.item.id
+      @order_detail.order_id = @order.id
+      @order_detail.amount = cart_item.amount
+      @order_detail.buy_price = cart_item.item.price
+      @order_detail.save
+    end
+    current_customer.cart_items.destroy_all
+    redirect_to thanks_public_orders_path
   end
 
   def thanks
@@ -47,13 +49,14 @@ class Public::OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
-    @cart_items = @order.cart_items
+    @order_detail = @order.order_details
+    @total_price = 0
   end
 
   private
 
   def order_params
-    params.require(:order).permit(:address, :postcode, :payment, :name, :address_number )
+    params.require(:order).permit(:address, :postcode, :payment, :name, :freight, :total_cost )
   end
 
   def address_params

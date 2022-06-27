@@ -23,11 +23,11 @@
               <%= order.name %>
             </td>
             <td>
-              <% @cart_items.each do |cart_item| %>
-                <%= cart_item.item.name %>
+              <% order.order_details.each do |order_detail| %>
+                <%= order_detail.item.name %>
               <% end %>
             </td>
-            <td><%= (cart_item.item.price * 1.1).floor * cart_item.amount %>円</td>
+            <td><%= order.total_cost %>円</td>
             <td><%= order.order_status %></td>
             <td><%= link_to "表示する", public_order_path(order), class: "btn btn-primary" %></td>
           </tr>
