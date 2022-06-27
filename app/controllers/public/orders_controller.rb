@@ -51,7 +51,6 @@ class Public::OrdersController < ApplicationController
     @order = Order.find(params[:id])
     @order_detail = @order.order_details
     @total_price = 0
-    @total = 0
   end
 
   private
