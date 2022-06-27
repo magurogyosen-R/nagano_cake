@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 2022_06_26_031824) do
   create_table "cart_items", force: :cascade do |t|
     t.integer "item_id"
     t.integer "buy_price"
-    t.integer "amount", default: 0
+    t.integer "amount"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "customer_id"
@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(version: 2022_06_26_031824) do
     t.string "postcode"
     t.string "address"
     t.string "phone_number"
-    t.boolean "is_deleted", default: false, null: false
+    t.boolean "is_deleted"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_customers_on_email", unique: true
@@ -117,14 +117,14 @@ ActiveRecord::Schema.define(version: 2022_06_26_031824) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer "customer_id"
-    t.string "name"
-    t.string "postcode"
-    t.string "address"
+    t.integer "customer_id", null: false
+    t.string "name", null: false
+    t.string "postcode", null: false
+    t.string "address", null: false
     t.integer "order_status", default: 0, null: false
     t.integer "payment", default: 0, null: false
     t.integer "freight", null: false
-    t.integer "total_cost", default: 0
+    t.integer "total_cost", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "address_number"
