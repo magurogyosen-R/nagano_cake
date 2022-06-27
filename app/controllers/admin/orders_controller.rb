@@ -1,7 +1,6 @@
 class Admin::OrdersController < ApplicationController
   def index
     @orders = Order.all.page(params[:page])
-    @order
   end
 
   def show
@@ -13,11 +12,8 @@ class Admin::OrdersController < ApplicationController
   def update
     @order = Order.find(params[:id])
     @order_details = @order.order_details
-   if  @order.update(order_params)
-     redirect_to admin_order_path
-   else
-     render "show"
-   end
+    @order.update(order_params)
+    redirect_to admin_order_path(@order.id)
   end
 
   private
