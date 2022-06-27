@@ -28,10 +28,13 @@ class Public::CartItemsController < ApplicationController
 
   def destroy_all
     current_customer.cart_items.destroy_all
-    redirect_to cart_items_path
+    redirect_to public_cart_items_path
   end
 
   def update
+    @cart_item = CartItem.find(params[:id])
+    @cart_item.update(cart_item_params)
+    redirect_to public_cart_items_path(@cart_item.id)
   end
 
 end
