@@ -1,36 +1,37 @@
-<div class="row">
-  <%= render 'error', item: @item %>
+<div class="cotainer">
+  <div class="row">
 
-  <div class="container">
-    <h5>商品新規登録</h5>
-    <%= form_with model: @item, url: '/admin/items', method: :post do |f| %>
-      <p>商品画像</p>
-      <%= f.file_field :image, accept: "image/*" %>
+    <%= render 'error', item: @item %>
+    <div class="col-9 offset-1">
+     <h4>商品新規登録</h4>
+      <%= form_with model: @item, url: '/admin/items', method: :post do |f| %>
+        <div>商品画像</div>
+        <%= f.file_field :image, accept: "image/*" %>
 
-      <p>商品名</p>
-      <%= f.text_field :name %>
+        <div>商品名</div>
+        <%= f.text_field :name %>
 
-      <p>商品説明</p>
-      <%= f.text_area :introduction %>
+        <div>商品説明</div>
+        <%= f.text_area :introduction %>
 
-      <p>ジャンル</p>
-      <%= f.collection_select :genre_name, Genre.all, :name, :name %>
+        <div>ジャンル</div>
+        <%= f.collection_select :genre_name, Genre.all, :name, :name %>
 
-    	<p>税抜価格</p>
-    	<%= f.text_field :price %>円</br>
+      	<div>税抜価格</div>
+      	<%= f.text_field :price %>円</br>
 
-      <div class="sale_status">
-        <p>販売ステータス</p>
-        <div>
-          <%= f.radio_button :sale_status, true %>
-          <%= f.label :sale_status, '販売中', value: true %>
+        <div class="sale_status">
+          <p>販売ステータス</p>
+          <div>
+            <%= f.radio_button :sale_status, true %>
+            <%= f.label :sale_status, '販売中', value: true %>
+          </div>
+          <div>
+            <%= f.radio_button :sale_status, false %>
+            <%= f.label :sale_status, '販売停止中', value: false %>
+          </div>
         </div>
-        <div>
-          <%= f.radio_button :sale_status, false %>
-          <%= f.label :sale_status, '販売停止中', value: false %>
-        </div>
-      </div>
-      <%= f.submit '新規登録', class:"btn btn-group-sm btn-success" %>
-      <% end %>
+        <%= f.submit '新規登録', class:"btn btn-group-sm btn-success" %>
+        <% end %>
   </div>
 </div>

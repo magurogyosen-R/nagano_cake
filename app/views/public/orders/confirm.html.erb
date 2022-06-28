@@ -42,7 +42,7 @@
         </tr>
       </table>
     </div>
-    <p><strong>支払方法</strong><%= @order.payment %></p>
+    <p><strong>支払方法</strong><%= @order.payment %></p></br>
     <p><strong>お届け先</strong><%= @order.postcode %><%= @order.address %><%= @order.name %></p>
     <%= form_with model: @order,url: orders_path, method: :post do |f| %>
       <%= f.hidden_field :payment %>
