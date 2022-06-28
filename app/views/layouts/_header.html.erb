@@ -1,11 +1,16 @@
 <headar>
-  <nav class="navbar navbar-expand-lg navbar-right">
+  <nav class="navbar navbar-expand-lg navbar-right pb-4 border-bottom border-dark">
     <div class="container">
-      <a class="navbar-brand p-3" href="/"><!--ここに画像を入れる--></a>
+      <div>
+        <%= link_to root_path do %>
+        <%= image_tag 'herder.jpg', :size => '350x80' %>
+        <% end %>
+      </div>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+
+      <div class="navbar-collapse collapse show" id="navbarNavDropdown">
         <ul class="navbar-nav ml-auto">
         <% if customer_signed_in? %>
 
