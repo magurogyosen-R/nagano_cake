@@ -1,8 +1,8 @@
 <div class="container">
-  <h3>注文情報確認</h3>
+  <h3 class="col-md-8 offset-1">注文情報確認</h3>
   <div class="row">
-    <div class="col-6">
-      <table class="table">
+    <div class="col-md-8 d-flex">
+      <table class="table table-bordered">
         <thead>
           <tr>
             <th>商品名</th>
@@ -26,8 +26,8 @@
       </table>
     </div>
 
-    <div class="col-4">
-      <table class="table">
+    <div class="col-md-8 d-flex">
+      <table class="table table-bordered">
         <tr>
           <td>送料</td>
           <td><%= @order.freight.to_i %></td>
@@ -42,8 +42,12 @@
         </tr>
       </table>
     </div>
-    <p><strong>支払方法</strong><%= @order.payment %></p></br>
-    <p><strong>お届け先</strong><%= @order.postcode %><%= @order.address %><%= @order.name %></p>
+    <div class="col-md-8 d-flex">
+      <div>
+        <strong>支払方法</strong><%= @order.payment %><br>
+        <strong>お届け先</strong><%= @order.postcode %><%= @order.address %><%= @order.name %>
+      </div>
+    </div>
     <%= form_with model: @order,url: orders_path, method: :post do |f| %>
       <%= f.hidden_field :payment %>
       <%= f.hidden_field :postcode %>
